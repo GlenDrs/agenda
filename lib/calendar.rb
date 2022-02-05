@@ -1,7 +1,12 @@
 # frozen_string_literal: true
+require_relative 'lesson'
 
 class Calendar
-  def initialize
+  attr_reader :lesson
+  attr_accessor :date_time
+  def initialize(lesson, datetime)
+    @date_time = date_time
   end
+
 
 end

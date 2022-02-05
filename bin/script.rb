@@ -7,4 +7,9 @@ def creating_teachers
   mehdi_teacher.display_name
 end
 
+def creating_student
+  aurore_student = Student.new("Aurore")
+  moderna_student = Student.new("Aurore")
+end
+
 creating_teachers
