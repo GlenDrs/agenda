@@ -16,8 +16,7 @@ class Lesson
     @@all
   end
 
-  def new_calendar
-    Calendar.new(self)
+  def saving_date
+    Calendar.edit(self)
   end
-
 end

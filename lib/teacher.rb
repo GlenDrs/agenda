@@ -14,4 +14,7 @@ class Teacher
     p "Le nom de professeur est: #{@name}"
   end
 
+  def disponibility
+    Calendar.create(self)
+  end
 end
