@@ -15,8 +15,11 @@ def creating_student
   moderna_student = Student.new("Moderna")
   aurore_student.display_name
   moderna_student.display_name
-  aurore_student.new_lesson(:julie_teacher)
 end
+
+calendar = Calendar.new
+calendar.fill_slots
+calendar.available_slots
 
 creating_teachers
 creating_student

@@ -4,7 +4,7 @@
 ** Horaires d'ouvertures 9h-14h 15h-19h du Lundi au vendredi.
 ** Les horaires weekend sont: 9h-12 15h-17h 
 ** Nom des professeurs disponible: Mehdi et Julie.
-** Duree de la practique est une heure et deux éleves maximum par session.
+** Duree de la practice est une heure et deux éleves maximum par session.
 
 ** Creons une méthode qui prends l'input, une date et qui renvoie les disponibilitée du jour.
 ** Si la datte n'est pas inclus entre aujourd'hui et plus 7 jours, alors message d'erreur.
