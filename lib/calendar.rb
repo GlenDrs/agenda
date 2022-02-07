@@ -16,6 +16,10 @@ class Calendar
     p @time_slots
   end
 
+  def display_slots
+    #Afficher slots
+  end
+
   def end_date
     start_date + 7
   end
@@ -23,27 +27,29 @@ class Calendar
   def fill_slots
     7.times do |i|
       day_now = start_date + i
-        teachers.each do |teacher|
+      teachers.each do |teacher|
         case day_now.strftime("%A")
-          when "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
-              @time_slots.push(Lesson.new(teacher, day_now,'9','10'))
-              @time_slots.push(Lesson.new(teacher, day_now,'10','11'))
-              @time_slots.push(Lesson.new(teacher, day_now,'11','12'))
-              @time_slots.push(Lesson.new(teacher, day_now,'12','13'))
-              @time_slots.push(Lesson.new(teacher, day_now,'13','14'))
-              @time_slots.push(Lesson.new(teacher, day_now,'15','16'))
-              @time_slots.push(Lesson.new(teacher, day_now,'16','17'))
-              @time_slots.push(Lesson.new(teacher, day_now,'17','18'))
-              @time_slots.push(Lesson.new(teacher, day_now,'18','19'))
-          when "Saturday", "Sunday"
-              @time_slots.push(Lesson.new(teacher, day_now,'9','10'))
-              @time_slots.push(Lesson.new(teacher, day_now,'10','11'))
-              @time_slots.push(Lesson.new(teacher, day_now,'11','12'))
-              @time_slots.push(Lesson.new(teacher, day_now,'15','16'))
-              @time_slots.push(Lesson.new(teacher, day_now,'16','17'))
+        when "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+          [9..13, 15..18].each do |half_day|
+            half_day.each { |hour| push_time_slots(teacher, day_now, hour) }
+          end
+        when "Saturday", "Sunday"
+          [9..11, 15..16].each do |half_day|
+            half_day.each { |hour| push_time_slots(teacher, day_now, hour) }
+          end
         end
       end
     end
+  end
+
+  private
+
+  def new_lesson(teacher, day_now, hour)
+    Lesson.new(teacher, day_now, hour, hour + 1)
+  end
+
+  def push_time_slots(teacher, day_now, hour)
+    @time_slots.push(new_lesson(teacher, day_now, hour))
   end
 
 end
