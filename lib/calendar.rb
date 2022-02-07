@@ -23,9 +23,24 @@ class Calendar
   def fill_slots
     7.times do |i|
       day_now = start_date + i
-      if day_now.monday?
         teachers.each do |teacher|
-          @time_slots.push(Lesson.new(teacher, day_now,'9','10'))
+        case day_now.strftime("%A")
+          when "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+              @time_slots.push(Lesson.new(teacher, day_now,'9','10'))
+              @time_slots.push(Lesson.new(teacher, day_now,'10','11'))
+              @time_slots.push(Lesson.new(teacher, day_now,'11','12'))
+              @time_slots.push(Lesson.new(teacher, day_now,'12','13'))
+              @time_slots.push(Lesson.new(teacher, day_now,'13','14'))
+              @time_slots.push(Lesson.new(teacher, day_now,'15','16'))
+              @time_slots.push(Lesson.new(teacher, day_now,'16','17'))
+              @time_slots.push(Lesson.new(teacher, day_now,'17','18'))
+              @time_slots.push(Lesson.new(teacher, day_now,'18','19'))
+          when "Saturday", "Sunday"
+              @time_slots.push(Lesson.new(teacher, day_now,'9','10'))
+              @time_slots.push(Lesson.new(teacher, day_now,'10','11'))
+              @time_slots.push(Lesson.new(teacher, day_now,'11','12'))
+              @time_slots.push(Lesson.new(teacher, day_now,'15','16'))
+              @time_slots.push(Lesson.new(teacher, day_now,'16','17'))
         end
       end
     end
