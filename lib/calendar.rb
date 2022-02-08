@@ -4,7 +4,7 @@ require_relative 'lesson'
 
 class Calendar
   attr_reader :start_date
-  attr_accessor :teachers
+  attr_accessor :teachers, :time_slots
 
   def initialize
     @start_date = Date.today
@@ -13,11 +13,14 @@ class Calendar
   end
 
   def available_slots
-    p @time_slots
+    time_slots
   end
 
   def display_slots
-    #Afficher slots
+    lesson_hours = [[],[]]
+    ending_hours = []
+    time_slots.find_all {|lesson| lesson_hours.push([lesson.start_time, lesson.end_time]) }
+    p lesson_hours
   end
 
   def end_date
@@ -49,7 +52,7 @@ class Calendar
   end
 
   def push_time_slots(teacher, day_now, hour)
-    @time_slots.push(new_lesson(teacher, day_now, hour))
+    time_slots.push(new_lesson(teacher, day_now, hour))
   end
 
 end

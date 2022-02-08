@@ -20,6 +20,7 @@ end
 calendar = Calendar.new
 calendar.fill_slots
 calendar.available_slots
+calendar.display_slots
 
-creating_teachers
-creating_student
+#creating_teachers
+#creating_student
