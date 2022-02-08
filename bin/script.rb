@@ -21,6 +21,6 @@ calendar = Calendar.new
 calendar.fill_slots
 calendar.available_slots
 calendar.display_slots
-
+calendar.agenda_days
 #creating_teachers
 #creating_student
