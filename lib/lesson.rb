@@ -11,4 +11,8 @@ class Lesson
     @end_time = end_time
   end
 
+  def formatted_hours
+    [start_time, end_time]
+  end
+
 end
