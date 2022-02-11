@@ -25,15 +25,18 @@ class Calendar
   end
 
   def display_slots
-    #time_slots.map {|lesson| lesson.formatted_hours }
+      (Date.today..Date.today + 6).each do |day|
+      (time_slots[day.strftime("%A").downcase.to_sym]).map {|lesson| lesson.formatted_hours }
+      end
   end
 
   def agenda_days
     (Date.today..Date.today + 6).each do |day|
-      p "||---#{day.strftime("%A")}----"
-      p "|| Lesson #{time_slots[day.strftime("%A").downcase.to_sym]} :<>: "
-
-
+      day2 = (time_slots[day.strftime("%A").downcase.to_sym]).map {|lesson| lesson.formatted_hours }
+      p  "||---#{day.strftime("%A")}----"
+      day2.each do |hour_day|
+        p "|| Lesson #{hour_day[0]} - #{hour_day[1]} :<>: "
+      end
     end
   end
 
