@@ -26,16 +26,16 @@ class Calendar
 
   def display_slots
       (Date.today..Date.today + 6).each do |day|
-      (time_slots[day.strftime("%A").downcase.to_sym]).map {|lesson| lesson.formatted_hours }
+        return (time_slots[day.strftime("%A").downcase.to_sym]).map {|lesson| lesson.formatted_hours }
+        # question sur le return
       end
   end
 
   def agenda_days
     (Date.today..Date.today + 6).each do |day|
-      day2 = (time_slots[day.strftime("%A").downcase.to_sym]).map {|lesson| lesson.formatted_hours }
       p  "||---#{day.strftime("%A")}----"
-      day2.each do |hour_day|
-        p "|| Lesson #{hour_day[0]} - #{hour_day[1]} :<>: "
+      display_slots.each_with_index do |hour_day,i|
+        p "|| Lesson #{i+1}  #{hour_day[0]} - #{hour_day[1]} :<>: "
       end
     end
   end
