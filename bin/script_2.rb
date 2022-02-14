@@ -6,4 +6,4 @@ require_relative '../lib/calendar'
 calendar = Calendar.new
 calendar.fill_slots
 calendar.time_slots
-p calendar.display_slots.last
+calendar.display_slots

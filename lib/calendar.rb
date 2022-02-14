@@ -34,8 +34,10 @@ class Calendar
   def agenda_days
     (Date.today..Date.today + 6).each do |day|
       p  "||---#{day.strftime("%A")}----"
-      display_slots.each_with_index do |hour_day,i|
-        p "|| Lesson #{i+1}  #{hour_day[0]} - #{hour_day[1]} :<>: "
+      teachers.each do |t|
+        display_slots.each_with_index do |hour_day,i|
+          p "|| Lesson #{i+1}  #{hour_day[0]} - #{hour_day[1]} :<>: #{t.name} "
+        end
       end
     end
   end
