@@ -35,7 +35,10 @@ class Calendar
     today = Date.today
     if date.between?(today, today + 6)
       p  "||---#{date.strftime("%A")}----"
-      p "La datte choisit est Ok"
+      (time_slots[date.strftime("%A").downcase.to_sym]).map do |lesson|
+        hours_teachers = [lesson.formatted_hours, lesson.teacher.name]
+        p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
+      end
     elsif date > today + 6
       p "False à l'instent il n'y a pas encore des crénaux disponible"
     else p "False le jour chosit est déjà passé ou il n'existe pas"

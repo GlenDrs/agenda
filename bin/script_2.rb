@@ -5,6 +5,4 @@ require_relative '../lib/calendar'
 
 calendar = Calendar.new
 calendar.fill_slots
-#calendar.time_slots
-calendar.agenda_days
-calendar.choos_date( "2022/02/20" )
+calendar.choos_date( "2022/02/19" )
