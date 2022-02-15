@@ -20,30 +20,26 @@ class Calendar
     @teachers = [Teacher.new('Julie'), Teacher.new('Mehdi')]
   end
 
-  def available_slots
-    time_slots
-  end
-
   def display_slots
-      (Date.today..Date.today + 6).each do |day|
-        return (time_slots[day.strftime("%A").downcase.to_sym]).map {|lesson| lesson.formatted_hours }
-        # question sur le return
-      end
-  end
-
-  def agenda_days
     (Date.today..Date.today + 6).each do |day|
-      p  "||---#{day.strftime("%A")}----"
-      teachers.each do |t|
-        display_slots.each_with_index do |hour_day,i|
-          p "|| Lesson #{i+1}  #{hour_day[0]} - #{hour_day[1]} :<>: #{t.name} "
-        end
+      p "||---#{day.strftime("%A")}----"
+      (time_slots[day.strftime("%A").downcase.to_sym]).map do |lesson|
+        hours_teachers = [lesson.formatted_hours, lesson.teacher.name]
+        p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
       end
     end
   end
 
-  def end_date
-    start_date + 7
+  def choos_date(day_choosed)
+    p date =  Date.strptime(day_choosed, '%Y/%m/%d')
+    today = Date.today
+    if date.between?(today, today + 6)
+      p  "||---#{date.strftime("%A")}----"
+      p "La datte choisit est Ok"
+    elsif date > today + 6
+      p "False à l'instent il n'y a pas encore des crénaux disponible"
+    else p "False le jour chosit est déjà passé ou il n'existe pas"
+    end
   end
 
   def fill_slots

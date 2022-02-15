@@ -19,4 +19,4 @@ end
 
 calendar = Calendar.new
 calendar.fill_slots
-calendar.agenda_days
+calendar.display_slots
