@@ -3,7 +3,10 @@ require_relative '../lib/student'
 require_relative '../lib/lesson'
 require_relative '../lib/calendar'
 
-calendar = Calendar.new
-calendar.fill_slots
-calendar.time_slots
-p calendar.display_slots.last
+def select_day(date_selected)
+  calendar = Calendar.new
+  calendar.fill_slots
+  calendar.choose_date(date_selected)
+end
+
+select_day("2022/02/19")
