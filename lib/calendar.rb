@@ -21,27 +21,20 @@ class Calendar
   end
 
   def display_slots
-    (Date.today..Date.today + 6).each do |day|
-      p "||---#{day.strftime("%A")}----"
-      (time_slots[day.strftime("%A").downcase.to_sym]).map do |lesson|
-        hours_teachers = [lesson.formatted_hours, lesson.teacher.name]
-        p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
-      end
+    (Date.today..end_date).each do |day|
+      show_time_slots(day)
     end
   end
 
-  def choos_date(day_choosed)
+  def choose_date(day_choosed)
     p date =  Date.strptime(day_choosed, '%Y/%m/%d')
     today = Date.today
-    if date.between?(today, today + 6)
-      p  "||---#{date.strftime("%A")}----"
-      (time_slots[date.strftime("%A").downcase.to_sym]).map do |lesson|
-        hours_teachers = [lesson.formatted_hours, lesson.teacher.name]
-        p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
-      end
-    elsif date > today + 6
+    if date.between?(today, end_date)
+      show_time_slots(date)
+    elsif date > end_date
       p "False à l'instent il n'y a pas encore des crénaux disponible"
-    else p "False le jour chosit est déjà passé ou il n'existe pas"
+    else
+      p "False le jour chosit est déjà passé ou il n'existe pas"
     end
   end
 
@@ -71,5 +64,17 @@ class Calendar
 
   def push_time_slots(teacher, day_now, hour)
     time_slots[day_now.strftime("%A").downcase.to_sym].push(new_lesson(teacher, day_now, hour))
+  end
+
+  def show_time_slots(day_data)
+    p "||---#{day_data.strftime("%A")}----"
+    (time_slots[day_data.strftime("%A").downcase.to_sym]).map do |lesson|
+      hours_teachers = [lesson.formatted_hours, lesson.teacher.name]
+      p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
+    end
+  end
+
+  def end_date
+    Date.today + 6
   end
 end
