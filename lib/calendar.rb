@@ -56,6 +56,10 @@ class Calendar
     end
   end
 
+  def only_time_slots(reserve_day)
+    (time_slots[reserve_day.strftime("%A").downcase.to_sym])
+  end
+
   private
 
   def new_lesson(teacher, day_now, hour)

@@ -17,6 +17,10 @@ def creating_student
   moderna_student.display_name
 end
 
-calendar = Calendar.new
-calendar.fill_slots
-calendar.display_slots
+def reserv_day_hour(date_and_hour,teacher)
+  calendar = Calendar.new
+  calendar.fill_slots
+  Student.new("Aurore").appointmend(date_and_hour,teacher)
+end
+
+reserv_day_hour("2022/2/26, 16:00","Julie")
