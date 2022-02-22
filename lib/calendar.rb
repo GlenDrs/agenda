@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 require 'date'
 require_relative 'lesson'
+require_relative 'student'
+require 'time'
 
 class Calendar
   attr_reader :start_date
@@ -56,8 +58,8 @@ class Calendar
     end
   end
 
-  def only_time_slots(reserve_day)
-    (time_slots[reserve_day.strftime("%A").downcase.to_sym])
+  def appointmend(date_hour, student_name,teacher_name)
+    reserve_lesson(date_hour, student_name,teacher_name)
   end
 
   private
@@ -81,4 +83,41 @@ class Calendar
   def end_date
     Date.today + 6
   end
+
+  def only_time_slots(reserve_day)
+    (time_slots[reserve_day.strftime("%A").downcase.to_sym])
+  end
+
+  def reserve_lesson(date_hour, student_name, teacher_name)
+    date_hr = Time.parse(date_hour)
+    date = date_hr.to_date
+    start_hour = date_hr.strftime("%H").to_i
+
+    message_erreur = ""
+    only_time_slots(date).each do |hour|
+      if hour.start_time != start_hour
+        message_erreur = "Erreur l'heure choisit ne correspond pas aux crénaux du jour"
+      end
+    end
+    p message_erreur
+
+      only_time_slots(date).keep_if { |hour_teacher|
+    hour_teacher.teacher.name == teacher_name &&
+    hour_teacher.start_time == start_hour
+    }
+
+    only_time_slots(date).each do |day_hour|
+      if date.between?(Date.today, end_date)
+        p "______________________________"
+        p "Bonjour #{student_name}"
+        p "Vous avez reservé votre lesson de la datte: #{day_hour.date}"
+        p " dans le crénaux: #{day_hour.start_time} - #{day_hour.end_time}"
+        p " le proffesseur qui va fair le cours est: #{day_hour.teacher.name} "
+        p "______________________________"
+      else
+        p "Vous avez choisit une mauvaise datte: "
+      end
+    end
+  end
+
 end

@@ -11,16 +11,19 @@ def creating_teachers
 end
 
 def creating_student
-  aurore_student = Student.new("Aurore")
-  moderna_student = Student.new("Moderna")
-  aurore_student.display_name
-  moderna_student.display_name
+  list_students = []
+  list_students << Student.new("Aurore")
+  list_students << Student.new("Moderna")
+  list_students
 end
 
-def reserv_day_hour(date_and_hour,teacher)
+def reserv_day_hour(date_and_hour, student_name,teacher)
   calendar = Calendar.new
   calendar.fill_slots
-  Student.new("Aurore").appointmend(date_and_hour,teacher)
+  calendar.appointmend(date_and_hour, student_name,teacher)
 end
 
-reserv_day_hour("2022/2/26, 16:00","Julie")
+std_1 = creating_student.first.name
+std_2 = creating_student[1].name
+#reserv_day_hour("2022/2/26, 16:00", std_1, "Julie")
+reserv_day_hour("2022/2/27, 9:00", std_2, "Mehdi")
