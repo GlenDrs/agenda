@@ -34,9 +34,9 @@ class Calendar
     if date.between?(today, end_date)
       show_time_slots(date)
     elsif date > end_date
-      p "False à l'instent il n'y a pas encore des crénaux disponible"
+      p "Erreur le jour choisi est dehors les créneaux disponibles"
     else
-      p "False le jour chosit est déjà passé ou il n'existe pas"
+      p "Erreur le jour chosi est déjà passé ou il n'existe pas"
     end
   end
 
@@ -58,8 +58,8 @@ class Calendar
     end
   end
 
-  def appointmend(date_hour, student_name,teacher_name)
-    reserve_lesson(date_hour, student_name,teacher_name)
+  def appointment(date_hour, student_name,teacher_name)
+    book_lesson(date_hour, student_name,teacher_name)
   end
 
   private
@@ -76,7 +76,7 @@ class Calendar
     p "||---#{day_data.strftime("%A")}----"
     (time_slots[day_data.strftime("%A").downcase.to_sym]).map do |lesson|
       hours_teachers = [lesson.formatted_hours, lesson.teacher.name]
-      p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
+        p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
     end
   end
 
@@ -84,19 +84,18 @@ class Calendar
     Date.today + 6
   end
 
-  def only_time_slots(reserve_day)
-    (time_slots[reserve_day.strftime("%A").downcase.to_sym])
+  def only_time_slots(book_day)
+    (time_slots[book_day.strftime("%A").downcase.to_sym])
   end
 
-  def reserve_lesson(date_hour, student_name, teacher_name)
-    date_hr = Time.parse(date_hour)
-    date = date_hr.to_date
-    start_hour = date_hr.strftime("%H").to_i
+  def book_lesson(date_hour, student_name, teacher_name)
+    date = Time.parse(date_hour).to_date
+    start_hour = Time.parse(date_hour).strftime("%H").to_i
 
     message_erreur = ""
     only_time_slots(date).each do |hour|
       if hour.start_time != start_hour
-        message_erreur = "Erreur l'heure choisit ne correspond pas aux crénaux du jour"
+        message_erreur = "Erreur l'heure choisi ne correspond pas aux créneaux du jour"
       end
     end
     p message_erreur
@@ -110,12 +109,12 @@ class Calendar
       if date.between?(Date.today, end_date)
         p "______________________________"
         p "Bonjour #{student_name}"
-        p "Vous avez reservé votre lesson de la datte: #{day_hour.date}"
-        p " dans le crénaux: #{day_hour.start_time} - #{day_hour.end_time}"
-        p " le proffesseur qui va fair le cours est: #{day_hour.teacher.name} "
+        p "Vous avez réservé votre leçon à la datte: #{day_hour.date}"
+        p " dans le créneaux: #{day_hour.start_time} - #{day_hour.end_time}"
+        p " Le professeur qui va faire le cours est: #{day_hour.teacher.name} "
         p "______________________________"
       else
-        p "Vous avez choisit une mauvaise datte: "
+        p "Vous avez choisi une mauvaise datte: "
       end
     end
   end

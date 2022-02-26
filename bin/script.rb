@@ -17,13 +17,20 @@ def creating_student
   list_students
 end
 
-def reserv_day_hour(date_and_hour, student_name,teacher)
+def agenda_copleted
   calendar = Calendar.new
   calendar.fill_slots
-  calendar.appointmend(date_and_hour, student_name,teacher)
+  calendar.display_slots
+end
+
+def book_day_hour(date_and_hour, student_name,teacher)
+  calendar = Calendar.new
+  calendar.fill_slots
+  calendar.appointment(date_and_hour, student_name,teacher)
 end
 
 std_1 = creating_student.first.name
 std_2 = creating_student[1].name
 #reserv_day_hour("2022/2/26, 16:00", std_1, "Julie")
-reserv_day_hour("2022/2/27, 9:00", std_2, "Mehdi")
+book_day_hour("2022/2/27, 9:00", std_2, "Mehdi")
+#agenda_copleted

@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 require_relative '../../lib/calendar'
-=begin
+
 RSpec.describe Calendar do
-  it '#end_date' do
-    expect(Calendar.new.end_date).to eq(Date.today + 6)
+  it '#start_date' do
+    expect(described_class.new.start_date).to eq(Date.today)
+  end
+
+  it '#time_slots' do
+    expect(described_class.new.time_slots).to be_a(Hash)
   end
 
 end
-=end
