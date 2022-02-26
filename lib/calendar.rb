@@ -28,7 +28,7 @@ class Calendar
     end
   end
 
-  def choose_date(day_choosed)
+  def display_day(day_choosed)
     p date =  Date.strptime(day_choosed, '%Y/%m/%d')
     today = Date.today
     if date.between?(today, end_date)

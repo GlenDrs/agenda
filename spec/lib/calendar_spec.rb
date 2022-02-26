@@ -21,4 +21,18 @@ RSpec.describe Calendar do
   it '#teachers' do
     expect(calendar.teachers.sample).to be_a Teacher
   end
+
+  it '#display_slots' do
+    expect(calendar.display_slots.first).to eq Date.today
+    expect(calendar.display_slots.last).to eq (Date.today + 6)
+  end
+
+  it '#display_day' do
+    expect(calendar.display_day(Date.today.strftime('%Y/%m/%d'))).to be_empty
+  end
+
+  it '#display_day' do
+    calendar.fill_slots
+    expect(calendar.display_day(Date.today.strftime('%Y/%m/%d'))).not_to be_empty
+  end
 end
