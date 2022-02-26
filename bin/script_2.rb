@@ -9,4 +9,4 @@ def select_day(date_selected)
   calendar.display_day(date_selected)
 end
 
-select_day("2022/02/27")
+select_day("2022/03/2")

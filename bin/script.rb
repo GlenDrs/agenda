@@ -32,5 +32,5 @@ end
 std_1 = creating_student.first.name
 std_2 = creating_student[1].name
 #reserv_day_hour("2022/2/26, 16:00", std_1, "Julie")
-book_day_hour("2022/2/27, 9:00", std_2, "Mehdi")
+book_day_hour("2022/3/3, 9:00", std_2, "Mehdi")
 #agenda_copleted
