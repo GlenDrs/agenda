@@ -11,12 +11,26 @@ def creating_teachers
 end
 
 def creating_student
-  aurore_student = Student.new("Aurore")
-  moderna_student = Student.new("Moderna")
-  aurore_student.display_name
-  moderna_student.display_name
+  list_students = []
+  list_students << Student.new("Aurore")
+  list_students << Student.new("Moderna")
+  list_students
 end
 
-calendar = Calendar.new
-calendar.fill_slots
-calendar.display_slots
+def agenda_copleted
+  calendar = Calendar.new
+  calendar.fill_slots
+  calendar.display_slots
+end
+
+def book_day_hour(date_and_hour, student_name,teacher)
+  calendar = Calendar.new
+  calendar.fill_slots
+  calendar.appointment(date_and_hour, student_name,teacher)
+end
+
+std_1 = creating_student.first.name
+std_2 = creating_student[1].name
+#reserv_day_hour("2022/2/26, 16:00", std_1, "Julie")
+book_day_hour("2022/3/3, 9:00", std_2, "Mehdi")
+#agenda_copleted

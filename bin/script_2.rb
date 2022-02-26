@@ -6,7 +6,7 @@ require_relative '../lib/calendar'
 def select_day(date_selected)
   calendar = Calendar.new
   calendar.fill_slots
-  calendar.choose_date(date_selected)
+  calendar.display_day(date_selected)
 end
 
-select_day("2022/02/19")
+select_day("2022/03/2")

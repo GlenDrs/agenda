@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 require 'date'
 require_relative 'lesson'
+require_relative 'student'
+require 'time'
 
 class Calendar
   attr_reader :start_date
@@ -26,15 +28,13 @@ class Calendar
     end
   end
 
-  def choose_date(day_choosed)
+  def display_day(day_choosed)
     p date =  Date.strptime(day_choosed, '%Y/%m/%d')
     today = Date.today
     if date.between?(today, end_date)
       show_time_slots(date)
-    elsif date > end_date
-      p "False à l'instent il n'y a pas encore des crénaux disponible"
     else
-      p "False le jour chosit est déjà passé ou il n'existe pas"
+      p "Erreur le jour choisi n'est pas correct"
     end
   end
 
@@ -56,6 +56,10 @@ class Calendar
     end
   end
 
+  def appointment(date_hour, student_name,teacher_name)
+    book_lesson(date_hour, student_name,teacher_name)
+  end
+
   private
 
   def new_lesson(teacher, day_now, hour)
@@ -70,11 +74,47 @@ class Calendar
     p "||---#{day_data.strftime("%A")}----"
     (time_slots[day_data.strftime("%A").downcase.to_sym]).map do |lesson|
       hours_teachers = [lesson.formatted_hours, lesson.teacher.name]
-      p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
+        p "|| Lesson  #{hours_teachers[0][0]} - #{hours_teachers[0][1]} :<>: #{hours_teachers[1]} "
     end
   end
 
   def end_date
     Date.today + 6
   end
+
+  def only_time_slots(book_day)
+    (time_slots[book_day.strftime("%A").downcase.to_sym])
+  end
+
+  def book_lesson(date_hour, student_name, teacher_name)
+    date = Time.parse(date_hour).to_date
+    start_hour = Time.parse(date_hour).strftime("%H").to_i
+
+    message_erreur = ""
+    only_time_slots(date).each do |hour|
+      if hour.start_time != start_hour
+        message_erreur = "Erreur l'heure choisi ne correspond pas aux créneaux du jour"
+      end
+    end
+    p message_erreur
+
+      only_time_slots(date).keep_if { |hour_teacher|
+    hour_teacher.teacher.name == teacher_name &&
+    hour_teacher.start_time == start_hour
+    }
+
+    only_time_slots(date).each do |day_hour|
+      if date.between?(Date.today, end_date)
+        p "______________________________"
+        p "Bonjour #{student_name}"
+        p "Vous avez réservé votre leçon à la datte: #{day_hour.date}"
+        p " dans le créneaux: #{day_hour.start_time} - #{day_hour.end_time}"
+        p " Le professeur qui va faire le cours est: #{day_hour.teacher.name} "
+        p "______________________________"
+      else
+        p "Vous avez choisi une mauvaise datte: "
+      end
+    end
+  end
+
 end
