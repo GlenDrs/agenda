@@ -17,4 +17,8 @@ RSpec.describe Calendar do
       expect(calendar.time_slots.values.sample).to be_empty
     end
   end
+
+  it '#teachers' do
+    expect(calendar.teachers.sample).to be_a Teacher
+  end
 end
