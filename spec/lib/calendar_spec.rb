@@ -2,12 +2,19 @@
 require_relative '../../lib/calendar'
 
 RSpec.describe Calendar do
+  subject(:calendar) { described_class.new }
+
   it '#start_date' do
-    expect(described_class.new.start_date).to eq(Date.today)
+    expect(calendar.start_date).to eq(Date.today)
   end
 
-  it '#time_slots' do
-    expect(described_class.new.time_slots).to be_a(Hash)
-  end
+  describe '#time_slots' do
+    it 'Is an Hash' do
+      expect(calendar.time_slots).to be_a(Hash)
+    end
 
+    it 'Is an Hash with week days with empty time slots' do
+      expect(calendar.time_slots.values.sample).to be_empty
+    end
+  end
 end
