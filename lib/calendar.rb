@@ -33,10 +33,8 @@ class Calendar
     today = Date.today
     if date.between?(today, end_date)
       show_time_slots(date)
-    elsif date > end_date
-      p "Erreur le jour choisi est dehors les créneaux disponibles"
     else
-      p "Erreur le jour chosi est déjà passé ou il n'existe pas"
+      p "Erreur le jour choisi n'est pas correct"
     end
   end
 

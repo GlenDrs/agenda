@@ -35,4 +35,9 @@ RSpec.describe Calendar do
     calendar.fill_slots
     expect(calendar.display_day(Date.today.strftime('%Y/%m/%d'))).not_to be_empty
   end
+
+  it '#display_day' do
+    expect(calendar.display_day((Date.today + 8).strftime('%Y/%m/%d')))
+    .to eq "Erreur le jour choisi n'est pas correct"
+  end
 end
